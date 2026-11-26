@@ -1,52 +1,72 @@
 package br.com.senac.sp.pi.galarraga.backend.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "evento")
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_evento")
+    private Integer id;
 
-    private String urlImage;
-    private String nome;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_local", nullable = false)
+    private LocalEvento local;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Categoria categoria;
+    @Column(nullable = false, length = 150)
+    private String titulo;
+    @Column(columnDefinition = "text")
     private String descricao;
-    private String endereco;
-    private LocalDate dataHora;
-    private BigDecimal preco;
-    private Integer quantidade;
-    private boolean isAtivo;
-    private boolean isDestaque;
+    @Column(length = 255)
+    private String bannerUrl;
+    @Column(nullable = false)
+    private LocalDateTime dataInicio;
+    @Column(nullable = false)
+    private LocalDateTime dataFim;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private StatusEvento status = StatusEvento.ATIVO;
 
-    public Evento() {
-    }
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LocalEvento getLocal() {
+        return local;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public void setLocal(LocalEvento local) {
+        this.local = local;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public String getNome() {
-        return nome;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
@@ -57,51 +77,35 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getBannerUrl() {
+        return bannerUrl;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
-    public LocalDate getDataHora() {
-        return dataHora;
+    public LocalDateTime getDataInicio() {
+        return dataInicio;
     }
 
-    public void setDataHora(LocalDate dataHora) {
-        this.dataHora = dataHora;
+    public void setDataInicio(LocalDateTime dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public BigDecimal getPreco() {
-        return preco;
+    public LocalDateTime getDataFim() {
+        return dataFim;
     }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+    public void setDataFim(LocalDateTime dataFim) {
+        this.dataFim = dataFim;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public StatusEvento getStatus() {
+        return status;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public boolean isAtivo() {
-        return isAtivo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        isAtivo = ativo;
-    }
-
-    public boolean isDestaque() {
-        return isDestaque;
-    }
-
-    public void setDestaque(boolean destaque) {
-        isDestaque = destaque;
+    public void setStatus(StatusEvento status) {
+        this.status = status;
     }
 }
