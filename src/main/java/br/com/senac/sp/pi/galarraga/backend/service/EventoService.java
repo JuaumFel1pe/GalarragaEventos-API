@@ -3,7 +3,6 @@ package br.com.senac.sp.pi.galarraga.backend.service;
 import br.com.senac.sp.pi.galarraga.backend.dto.EventoRequest;
 import br.com.senac.sp.pi.galarraga.backend.dto.EventoResponse;
 import br.com.senac.sp.pi.galarraga.backend.exception.ErrosApi;
-import br.com.senac.sp.pi.galarraga.backend.model.Categoria;
 import br.com.senac.sp.pi.galarraga.backend.model.Evento;
 import br.com.senac.sp.pi.galarraga.backend.repository.CategoriaRepository;
 import br.com.senac.sp.pi.galarraga.backend.repository.EventoRepository;

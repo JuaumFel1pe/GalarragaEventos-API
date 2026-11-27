@@ -12,6 +12,7 @@ Na pasta da API, rode pelo PowerShell:
 
 Com Gradle, use `.\gradlew.bat bootRun`. Pela IDE, execute `BackendApplication` com a pasta da API como diretório de trabalho. Veja as rotas no [Swagger](http://localhost:8080/swagger-ui.html).
 
+<<<<<<< HEAD
 O H2 cria `data/galarraga-eventos.mv.db` se o arquivo ainda não existir e mantém os dados ao reiniciar. Os perfis padrão, `local` e `mercadopago-teste` usam esse mesmo arquivo. Se você atualizar o projeto em outra pasta, copie o arquivo H2 anterior para a pasta `data` da nova API com as duas versões desligadas. O antigo `galarraga-pagamento-teste.mv.db`, quando existe, continua separado e os registros dele não são importados automaticamente.
 
 ## Entrar como administrador
@@ -19,6 +20,13 @@ O H2 cria `data/galarraga-eventos.mv.db` se o arquivo ainda não existir e mant�
 Ao iniciar a API sem um administrador cadastrado e sem credenciais personalizadas, ela cria a conta `ADMIN` e gera uma senha. Abra `config/admin-local.properties` na pasta da API e use os valores de `email` e `senha` na tela de login ou em `POST /auth/login`. Guarde esse arquivo localmente. Em cada reinicialização, a conta já cadastrada é reutilizada.
 
 Para escolher as credenciais antes da primeira execução, crie `config/application.properties` e informe os dados abaixo. Use um e-mail e um CPF que ainda não estejam cadastrados como cliente.
+=======
+O H2 cria `data/galarraga-eventos.mv.db` se o arquivo ainda não existir. Para usar os dados de uma instalação anterior, rode a nova versão com o mesmo arquivo H2 e a mesma URL JDBC.
+
+## Criar o administrador
+
+Crie `config/application.properties` na pasta da API e informe os dados abaixo. Use um e-mail e um CPF que ainda não estejam cadastrados como cliente.
+>>>>>>> f3430850c87f8753f41811773960e92c9b2ea58d
 
 ```properties
 app.admin.email=admin@galarraga.example
@@ -26,7 +34,11 @@ app.admin.senha=COLOQUE_SUA_SENHA_AQUI
 app.admin.cpf=12345678909
 ```
 
+<<<<<<< HEAD
 Escolha uma senha com pelo menos oito caracteres. O Swagger aceita o JWT no botão **Authorize**. O cadastro público em `POST /auth/register` cria contas `USER`.
+=======
+Escolha uma senha com pelo menos oito caracteres. Na primeira inicialização com esses dados, a API cria a conta `ADMIN`. Depois, use o e-mail e a senha no frontend ou em `POST /auth/login`. O Swagger aceita o JWT no botão **Authorize**. O cadastro público em `POST /auth/register` cria contas `USER`.
+>>>>>>> f3430850c87f8753f41811773960e92c9b2ea58d
 
 Para cadastrar eventos de exemplo em um catálogo vazio, adicione `app.demo.catalogo=true` nesse mesmo arquivo.
 

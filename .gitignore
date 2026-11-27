@@ -38,4 +38,7 @@ out/
 /data/
 /target/
 /config/application.properties
+<<<<<<< HEAD
 /config/admin-local.properties
+=======
+>>>>>>> f3430850c87f8753f41811773960e92c9b2ea58d

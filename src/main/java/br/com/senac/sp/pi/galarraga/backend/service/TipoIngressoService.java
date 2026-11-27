@@ -3,7 +3,6 @@ package br.com.senac.sp.pi.galarraga.backend.service;
 import br.com.senac.sp.pi.galarraga.backend.dto.TipoIngressoDto;
 import br.com.senac.sp.pi.galarraga.backend.dto.TipoIngressoEntrada;
 import br.com.senac.sp.pi.galarraga.backend.exception.ErrosApi;
-import br.com.senac.sp.pi.galarraga.backend.model.Evento;
 import br.com.senac.sp.pi.galarraga.backend.model.TipoIngresso;
 import br.com.senac.sp.pi.galarraga.backend.repository.EventoRepository;
 import br.com.senac.sp.pi.galarraga.backend.repository.TipoIngressoRepository;
