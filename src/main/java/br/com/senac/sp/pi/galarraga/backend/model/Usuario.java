@@ -1,56 +1,107 @@
 package br.com.senac.sp.pi.galarraga.backend.model;
 
-import jakarta.persistence.*;
-import org.jspecify.annotations.Nullable;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import java.util.Collection;
-import java.util.List;
+import java.time.LocalDateTime;
 
-public class Usuario implements UserDetails {
+@Entity
+@Table(name = "usuario")
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_usuario")
+    private Integer id;
 
-    @Column(unique = true, nullable = false)
-    private String login;
-
-    @Column(unique = true, nullable = false)
-    private String senha;
-
+    @Column(nullable = false, length = 100)
+    private String nome;
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
+    @Column(name = "senha_hash", nullable = false, length = 255)
+    private String senhaHash;
+    @Column(nullable = false, unique = true, length = 14)
+    private String cpf;
+    @Column(length = 20)
+    private String telefone;
+    @Column(nullable = false)
+    private LocalDateTime dataCadastro;
+    @Column(nullable = false)
+    private boolean ativo = true;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
     private UserRole role;
 
-    public Usuario() {
+    public Integer getId() {
+        return id;
     }
 
-    public Usuario(String login, String senha, UserRole role) {
-        this.login = login;
-        this.senha = senha;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenhaHash() {
+        return senhaHash;
+    }
+
+    public void setSenhaHash(String senhaHash) {
+        this.senhaHash = senhaHash;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
         this.role = role;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN){
-            return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER")
-                    //Precisa passar desse formato, "ROLE_" e na frente um dos enums que colocamos
-            );
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public @Nullable String getPassword() {
-        return "";
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 }

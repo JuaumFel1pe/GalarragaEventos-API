@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+/data/
+/target/
+/config/application.properties
+/config/admin-local.properties
